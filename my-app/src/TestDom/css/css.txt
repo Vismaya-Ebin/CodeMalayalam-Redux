@@ -1,0 +1,150 @@
+.avatar{
+        width:150px;
+        height:150px;
+        border:2px solid gray;
+        border-radius:100%;
+      }
+
+https://gyeonghokim.github.io/front-end/TestDomeHTMLCSS/
+
+
+MCQ
+
+Add transform: rotate(25deg) to the 33% key frame and transform: rotate(-25deg) to the 66% key frame.
+Add a .buy-button:hover CSS block with animation-duration: 1s and animation-name: wiggle in it.
+Add a @keyframes wiggle CSS block with the animation steps in it.
+
+
+
+ARTICLE
+
+
+html,body {
+    padding:0;
+    margin:0;
+    height:100vh;
+}
+article {
+  min-height: 50%;
+  width: 50%;
+  float: left;
+}
+article:nth-child(1) {
+    background: Red;
+   }
+article:nth-child(2) {
+    background: Yellow;
+   }
+article:nth-child(3) {
+    background: Blue;
+   }
+article:nth-child(4) {
+    background: Green;
+   }
+
+   CHECK DOCUMENTATION
+
+     a {
+        cursor: help;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: lavender;
+      }
+      a:before {
+        content: ">";
+      }
+      a:after {
+        content: "<";
+      }
+
+       Formula: <input list="formulas" name="formula"><br/>
+    <datalist id="formulas">
+      <option value="sin">
+      <option value="cos">
+      <option value="tan">
+      <option value="cot">
+    </datalist> 
+    Iterations: <input type="range" name="iterations" min="1" max="10"><br />
+    Precision: <input type="number" name="precision" min="1" max="100" value="50"><br />
+
+    Grocerry App
+
+
+
+    const Product = props => {
+  const plus = () => {
+    props.onVote(1, props.index);
+  };
+  const minus = () => {
+    props.onVote(-1, props.index);
+  };
+  return (
+    <li>
+      <span>{props.name}</span> - <span>votes: {props.votes}</span>
+      <button onClick={plus}>+</button>{" "}
+      <button onClick={minus}>-</button>
+    </li>
+  );
+};
+
+const GroceryApp = (props) => {
+  let [products, setProducts] = React.useState(props.products);
+  const onVote = (dir, index) => {
+    setProducts(products.map((product, i) => {
+        if (i === index) {
+          return { ...product, votes: product.votes + dir };
+        }
+        return product;
+      })
+    );
+  };
+
+  return (
+    <ul>
+      {products.map((p, i) => {
+        return <Product key={p.name} {...p} onVote={onVote} index={i} />;
+      })}
+    </ul>
+  );
+}
+
+document.body.innerHTML = "<div id='root'></div>";
+
+ReactDOM.render(<GroceryApp
+  products={[
+    { name: "Oranges", votes: 0 },
+    { name: "Bananas", votes: 0 }
+  ]}
+/>, document.getElementById('root'));
+
+let plusButton = document.querySelector("ul > li > button");
+if(plusButton) {
+  plusButton.click();
+}
+console.log(document.getElementById('root').outerHTML)
+
+
+
+REMOVE ITEM 
+class ImageGallery extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { links: props.links };
+  }
+  
+  remove(position) {
+    let links = this.state.links;
+  	this.setState({ links: [
+          ...links.slice(0, position),
+          ...links.slice(position + 1, links.length)
+        ] });
+  }
+  
+  render() {
+    return (<div> { this.state.links.map((item, index) => (<div className="image" key={index}>
+                      <img src={item} />
+                      <button className="remove" 
+                        onClick={ this.remove.bind(this, index) }>X</button></div>)) 
+                 } </div>);
+  }
+}

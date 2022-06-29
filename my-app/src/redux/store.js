@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-
+import { configureStore  } from "@reduxjs/toolkit";
+import testMiddleware from "./testMiddleware.js";
+import {applyMiddleware} from "redux";
 const initialState = {
   value: 100,
   showLabel: true,
@@ -8,6 +9,7 @@ const initialState = {
 function appReducer(prevState = initialState, action) {
   switch (action.type) {
     case "increment":
+      //immutable coding of state
       return {
         ...prevState,
         value: prevState.value + 1,
@@ -24,6 +26,10 @@ function appReducer(prevState = initialState, action) {
       return prevState;
   }
 }
-const store = configureStore({ reducer: appReducer });
+const store = configureStore({
+  reducer: appReducer,
+  middleware: [testMiddleware],
+})
+
 
 export default store;

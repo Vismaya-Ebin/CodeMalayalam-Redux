@@ -1,0 +1,25 @@
+function removeProperty(obj, prop) {
+  if (prop in obj) {
+    delete obj[prop];
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+ALERT - CLOSURE
+
+function getHandler(index) {
+  return function () {
+    alert(index);
+    return false;
+  };
+}
+
+function registerHandlers() {
+  var as = document.getElementsByTagName('a');
+  for (var i = 0; i < as.length; i++) {
+    as[i].onclick = getHandler(i);
+  }
+}
